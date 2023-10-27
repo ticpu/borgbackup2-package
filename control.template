@@ -1,0 +1,37 @@
+Package: borgbackup2-venv
+Version: ${VERSION}~${DISTRO}-1
+Architecture: amd64
+Maintainer: Jérôme Poulin <jeromepoulin@gmail.com>
+Installed-Size: ${SIZE}
+Depends: python3 (>= 3.9~), libacl1, liblz4-1, libxxhash0, libzstd1
+Recommends: fuse
+Section: admin
+Priority: optional
+Homepage: https://borgbackup.github.io/borgbackup/
+Description: deduplicating and compressing backup program (version 2.x)
+ Borg is a deduplicating and compressing backup program. Optionally, it
+ also supports authenticated encryption. It was forked from the attic
+ backup program.
+ .
+ The main goal of Borg is to provide an efficient and secure way to
+ backup data. The data deduplication technique used makes Borg suitable
+ for daily backups since only the changes are stored. The authenticated
+ encryption makes it suitable for backups to not fully trusted targets.
+ .
+ It can push backups to remote repositories accessed via ssh. A client
+ pushing a backup invokes "borg serve" on the repository host. It is
+ possible to restrict the ssh key to "borg serve" using the
+ authorized_keys command= clause.
+ .
+ Please note that the server and the client should be on the same
+ version of borgbackup. Using different versions of borgbackup on
+ client and server might result in 'incompatible API version' error
+ messages and a non-working backup. Borg 2.x can only read from Borg 1.x
+ repositories.
+ .
+ While there is no direct operations mode for pull-type backups, you
+ can configure the backup target in append-only mode, preventing the
+ backup source from deleting or altering previous backups.
+ .
+ Warning: This still is a beta that may break compatibility with the
+ final 2.0 release.
