@@ -30,6 +30,11 @@ RUN apt-get update -y && \
 		-y
 WORKDIR /
 RUN /opt/borgbackup2/bin/borg --help && \
+	ln -s /opt/borgbackup2/bin/borg /usr/bin/borg2 && \
+	ln -s /opt/borgbackup2/bin/borgfs /usr/bin/borgfs2 && \
 	find /opt/borgbackup2 -type f -print0 | xargs -0 md5sum > /md5sums && \
 	du -s /opt/borgbackup2 | cut -f1 > /size && \
-	tar -czpf "/borgbackup2-${VERSION}.tar.gz" ./opt/borgbackup2/
+	tar -czpf "/borgbackup2-${VERSION}.tar.gz" \
+		./opt/borgbackup2/ \
+		./usr/bin/borg2 \
+		./usr/bin/borgfs2
